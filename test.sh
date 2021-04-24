@@ -3,9 +3,9 @@ docker run --rm --name ana -d -p 8080:8080 -e READ_MEMORY_API=http://localhost:8
 
 RESULT=`curl -s --header "Content-Type: application/json" \
   --request POST \
-  --data '{"opcode":166,"state":{"a":255,"b":1,"c":15,"d":5,"e":15,"h":10,"l":2,"flags":{"sign":false,"zero":false,"auxCarry":false,"parity":false,"carry":true},"programCounter":1,"stackPointer":2,"cycles":0}}' \
+  --data '{"id":"abcd", "opcode":166,"state":{"a":255,"b":1,"c":15,"d":5,"e":15,"h":10,"l":2,"flags":{"sign":false,"zero":false,"auxCarry":false,"parity":false,"carry":true},"programCounter":1,"stackPointer":2,"cycles":0}}' \
   http://localhost:8080/api/v1/execute`
-EXPECTED='{"opcode":166,"state":{"a":10,"b":1,"c":15,"d":5,"e":15,"h":10,"l":2,"flags":{"sign":false,"zero":false,"auxCarry":false,"parity":true,"carry":false},"programCounter":1,"stackPointer":2,"cycles":7}}'
+EXPECTED='{"id":"abcd", "opcode":166,"state":{"a":10,"b":1,"c":15,"d":5,"e":15,"h":10,"l":2,"flags":{"sign":false,"zero":false,"auxCarry":false,"parity":true,"carry":false},"programCounter":1,"stackPointer":2,"cycles":7}}'
 
 docker kill ana
 
